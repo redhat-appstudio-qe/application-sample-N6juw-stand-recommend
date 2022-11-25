@@ -33,7 +33,7 @@ spec:
       - name: git-url
         value: https://github.com/devfile-samples/devfile-sample-code-with-quarkus
       - name: output-image
-        value: quay.io/hongweiliu/foobar:dev-code-with-quarkus-$(tt.params.git-revision)
+        value: quay.io/redhat-appstudio-qe/quarkus:next-$(tt.params.git-revision)
       - name: dockerfile
         value: src/main/docker/Dockerfile.jvm.staged
       - name: path-context
@@ -41,6 +41,9 @@ spec:
       pipelineRef:
         bundle: quay.io/redhat-appstudio/build-templates-bundle:13f5d9c921b3f727684a00084037f673a0dc4273
         name: docker-build
+      podTemplate:
+        imagePullSecrets:
+        - name: redhat-appstudio-registry-pull-secret
       workspaces:
       - name: workspace
         volumeClaimTemplate:
@@ -53,5 +56,8 @@ spec:
               requests:
                 storage: 1Gi
           status: {}
+      - name: registry-auth
+        secret:
+          secretName: redhat-appstudio-registry-pull-secret
     status: {}
 status: {}

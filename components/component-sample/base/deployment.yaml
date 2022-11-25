@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/instance: component-sample
     spec:
       containers:
-      - image: quay.io/hongweiliu/foobar:dev-code-with-quarkus
+      - image: quay.io/redhat-appstudio-qe/quarkus:next
         imagePullPolicy: Always
         name: container-image
         resources: {}
